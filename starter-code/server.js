@@ -105,7 +105,7 @@ app.put('/articles/:id', function(request, response) {
   });
 });
 
-// NOTE: 
+// NOTE: This would be the delete portion of our CRUD and this is interacting with our Article.prototype.deleteRecord method in the article.js. This is deleting from our articles within the parameters of the id. This is accessing our of the diagram.
 app.delete('/articles/:id', function(request, response) {
   client.query(
     `DELETE FROM articles WHERE article_id=$1;`,
@@ -119,7 +119,7 @@ app.delete('/articles/:id', function(request, response) {
   });
 });
 
-// NOTE:
+// NOTE:This would be the delete portion of our CRUD and it is interacting with our Article.truncateTable method in our article.js . This is truncating our articles from the table by accessing just our articles and not accessing an id like the function above. It is accessing our  of the diagram.
 app.delete('/articles', function(request, response) {
   client.query(
     'DELETE FROM articles;'
