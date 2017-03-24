@@ -55,7 +55,7 @@ app.get('/articles', function(request, response) {
   })
 });
 
-// NOTE:This is using 2,3,4 & 5 from our diagram - it's interacting with the Article.prototype.insertRecord method in our article.js - It's creating in our "CRUD" by adding to the database. It is getting a request from the client and then taking that request and adding it to the database and giving a response of "insert complete" or giving an error.
+// NOTE:This is using 1,2,3,4 & 5 from our diagram - it's interacting with the Article.prototype.insertRecord method in our article.js - It's creating in our "CRUD" by adding to the database. It is getting a request from the client and then taking that request and adding it to the database and giving a response of "insert complete" or giving an error.
 app.post('/articles', function(request, response) {
   client.query(
     `INSERT INTO
@@ -79,7 +79,7 @@ app.post('/articles', function(request, response) {
   });
 });
 
-// NOTE: 2,3,4,& 5 of our diagram model. This would be an update from our 'CRUD'. This is interacting with Article.prototype.updateRecord by accessing the /articles/:id
+// NOTE: 1,2,3,4,& 5 of our diagram model. This would be an update from our 'CRUD'. This is interacting with Article.prototype.updateRecord by accessing the /articles/:id
 app.put('/articles/:id', function(request, response) {
   client.query(
     `UPDATE articles
@@ -105,7 +105,7 @@ app.put('/articles/:id', function(request, response) {
   });
 });
 
-// NOTE: This would be the delete portion of our CRUD and this is interacting with our Article.prototype.deleteRecord method in the article.js. This is deleting from our articles within the parameters of the id. This is accessing our of the diagram.
+// NOTE:This would represent 1, 3, 4 & 5 in the diagram. This would be the delete portion of our CRUD and this is interacting with our Article.prototype.deleteRecord method in the article.js. This is deleting from our articles within the parameters of the id.
 app.delete('/articles/:id', function(request, response) {
   client.query(
     `DELETE FROM articles WHERE article_id=$1;`,
@@ -119,7 +119,7 @@ app.delete('/articles/:id', function(request, response) {
   });
 });
 
-// NOTE:This would be the delete portion of our CRUD and it is interacting with our Article.truncateTable method in our article.js . This is truncating our articles from the table by accessing just our articles and not accessing an id like the function above. It is accessing our  of the diagram.
+// NOTE:This would be the delete portion of our CRUD and it is interacting with our Article.truncateTable method in our article.js . This is truncating our articles from the table by accessing just our articles and not accessing an id like the function above. It is accessing our 1, 3, 4 & 5 of the diagram.
 app.delete('/articles', function(request, response) {
   client.query(
     'DELETE FROM articles;'
@@ -132,7 +132,7 @@ app.delete('/articles', function(request, response) {
   });
 });
 
-// NOTE:
+// NOTE:This is where the loaddatabase function is called
 loadDB();
 
 app.listen(PORT, function() {
@@ -142,7 +142,7 @@ app.listen(PORT, function() {
 
 //////// ** DATABASE LOADER ** ////////
 ////////////////////////////////////////
-// NOTE:
+// NOTE:This is doing 3 & 4 from our diagram. It does not interate with articles.js. It is making an event listener by waiting for the user to enter the String: SELECT COUNT(*) FROM articles. Then it returns a count of all article's rows from the hackerIpsum.json and from whatever was entered into the database.
 function loadArticles() {
   client.query('SELECT COUNT(*) FROM articles')
   .then(result => {
@@ -162,7 +162,7 @@ function loadArticles() {
   })
 }
 
-// NOTE:
+// NOTE:This is doing 3 & 4 from the diagram. It is not interacting with articles.js. This function creates a database if one does not exist already, it creates a framework then calls loadArticles to populate the table, if loadArticles fails then it returns an error.
 function loadDB() {
   client.query(`
     CREATE TABLE IF NOT EXISTS articles (
