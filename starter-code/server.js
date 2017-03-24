@@ -1,6 +1,6 @@
 'use strict';
 
-// TODO: Install and require the Node packages into your project, and ensure that it's now a new dependency in your package.json. DO NOT FORGET to run 'npm i'
+// DONE: Install and require the Node packages into your project, and ensure that it's now a new dependency in your package.json. DO NOT FORGET to run 'npm i'
 const pg = require('pg'); // 3rd party package
 const fs = require('fs'); // native Node
 const express = require('express'); // 3rd party package
@@ -10,7 +10,7 @@ const bodyParser = require('body-parser'); // 3rd party package
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-// TODO: Complete the connection string for the url that will connect to your local postgres database
+// DONE: Complete the connection string for the url that will connect to your local postgres database
 // Windows and Linux users; You should have retained the user/pw from the pre-work for this course.
 // Your url may require that it's composed of additional information including user and password
 // const conString = 'postgres://USER:PASSWORD@HOST:PORT/DBNAME';
@@ -31,12 +31,12 @@ app.use(express.static('./public'));
 
 // REVIEW: Routes for requesting HTML resources
 
-// NOTE:
+// NOTE:The request '/' is part 2 of our diagram and the response the index.html is part 5 of our diagram. This would be the 'read' part of our "CRUD". This line of code is handling a request/response for the index.html
 app.get('/', function(request, response) {
   response.sendFile('index.html', {root: '.'});
 });
 
-// NOTE:
+// NOTE:The request '/new' is part 2 and the response new.html is part 5 of our diagram. This would be the 'read' part of our "CRUD". This lise of code is handling a request/response for the new.html
 app.get('/new', function(request, response) {
   response.sendFile('new.html', {root: '.'});
 });
@@ -55,7 +55,7 @@ app.get('/articles', function(request, response) {
   })
 });
 
-// NOTE:
+// NOTE:This is using 2,3,4 & 5 from our diagram - it's interacting with the Article.prototype.insertRecord method in our article.js - It's creating in our "CRUD" by adding to the database. It is getting a request from the client and then taking that request and adding it to the database and giving a response of "insert complete" or giving an error.
 app.post('/articles', function(request, response) {
   client.query(
     `INSERT INTO
@@ -79,7 +79,7 @@ app.post('/articles', function(request, response) {
   });
 });
 
-// NOTE:
+// NOTE: 2,3,4,& 5 of our diagram model. This would be an update from our 'CRUD'. This is interacting with Article.prototype.updateRecord by accessing the /articles/:id
 app.put('/articles/:id', function(request, response) {
   client.query(
     `UPDATE articles
@@ -105,7 +105,7 @@ app.put('/articles/:id', function(request, response) {
   });
 });
 
-// NOTE:
+// NOTE: 
 app.delete('/articles/:id', function(request, response) {
   client.query(
     `DELETE FROM articles WHERE article_id=$1;`,
